@@ -479,16 +479,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'items' => [
-                    [
-                        'label' => 'English',
-                        'value' => 0,
-                    ],
-                    [
-                        'label' => 'Deutsch',
-                        'value' => 1,
-                    ],
-                ],
+                'itemsProcFunc' => \OpenOAP\OpenOap\UserFunctions\FormEngine\LanguageItemsProcFunc::class . '->getLanguageItems',
                 'size' => 3,
                 'autoSizeMax' => 10,
                 'multiple' => true,

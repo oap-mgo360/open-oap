@@ -1,5 +1,21 @@
 # Change log
 
+## Version X
+
+- Fixed the handling of CC addresses in individual status update mailto links
+- Added a new Deep Copy module for calls, allowing deep copying of calls including all related form pages, form groups, items, item options and group titles with configurable target folders
+- Added support for special call groups with an optional logo, enabling a flexible single- or dual-column layout on the dashboard
+- Replaced hardcoded language options for blocked languages with a dynamic list of all configured site languages (calls and call groups)
+- Added French translations for frontend labels and femanager
+- Frontend emails now use translated supporter mail texts based on the proposal language
+- Updated the privacy policy link in the registration intro text
+
+- ADD YOUR CHANGE ABOVE THIS LINE
+
+## Version 3.0.1
+
+- Added missing files that were accidentally omitted from the previous release.
+
 ## Version 3.0.0
 
 - TYPO3 v13 compatibility

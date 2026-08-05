@@ -41,6 +41,23 @@ $modules = [
             ],
         ],
     ],
+    'web_OpenOapBackendDeepCopy' => [
+        'parent' => 'web',
+        'access' => 'user',
+        'iconIdentifier' => 'open_oap-plugin-deepcopy',
+        'path' => '/module/web/OpenOapBackendDeepcopy',
+        'labels' => 'LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf',
+        'extensionName' => 'OpenOap',
+        'controllerActions' => [
+            \OpenOAP\OpenOap\Controller\BackendDeepCopyController::class => [
+                'index',
+                'deepCopy',
+            ],
+        ],
+        'appearance' => [
+            'renderInModuleMenu' => false,
+        ],
+    ],
 ];
 
 // Check if the backup module is enabled in the extension configuration

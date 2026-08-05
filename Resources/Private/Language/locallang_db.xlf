@@ -461,6 +461,12 @@
 			<trans-unit id="tx_openoap_domain_model_callgroup.description" resname="tx_openoap_domain_model_callgroup.description">
             	<source>Description</source>
             </trans-unit>
+			<trans-unit id="tx_openoap_domain_model_callgroup.special" resname="tx_openoap_domain_model_callgroup.special">
+            	<source>Special</source>
+            </trans-unit>
+			<trans-unit id="tx_openoap_domain_model_callgroup.logo" resname="tx_openoap_domain_model_callgroup.logo">
+            	<source>Logo</source>
+            </trans-unit>
 			<trans-unit id="tx_openoap_domain_model_callgroup.hint" resname="tx_openoap_domain_model_callgroup.hint">
             	<source>Hint</source>
             </trans-unit>

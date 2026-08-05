@@ -47,6 +47,7 @@ use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -466,6 +467,36 @@ class OapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     /**
+     * @param int $languageUid
+     * @param int $supporter
+     * @return array
+     */
+    protected function getTranslatedSupporter(int $languageUid, int $supporter): array
+    {
+        return $this->supporterRepository->findSupporterByLanguage($languageUid, $supporter);
+    }
+
+    /**
+     * Returns the language code of the proposal feLanguageUid
+     *
+     * @param Proposal $proposal
+     * @return string The 2 letter language code
+     */
+    protected function getProposalFrontendLanguageCode(Proposal $proposal): string
+    {
+        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+
+        try {
+            $site = $siteFinder->getSiteByPageId($proposal->getPid());
+            $siteLanguage = $site->getLanguageById($proposal->getFeLanguageUid());
+
+            return $siteLanguage->getLocale()->getLanguageCode();
+        } catch (\Throwable) {
+            return 'en';
+        }
+    }
+
+    /**
      * Returns the language service
      * @return LanguageService
      */
@@ -731,20 +762,22 @@ class OapBaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected function cleanupOptionItem(string $optionItemStr)
     {
         // initialize Item
-        $optionItem = [];
+        $optionItem = [
+            'key' => '',
+            'label' => '',
+        ];
 
         // cleanup raw string
         $optionItemStr = trim($optionItemStr);
         $optionItemStr = str_replace('"', "'", $optionItemStr);
 
         $optionParts = GeneralUtility::trimExplode(self::KEY_VALUE_DIVIDER, $optionItemStr, true);
+        if ($optionParts === []) {
+            return $optionItem;
+        }
 
         $optionItem['key'] = $optionParts[0];
-        if (count($optionParts) == 1) {
-            $optionItem['label'] = $optionParts[0];
-        } else {
-            $optionItem['label'] = $optionParts[1];
-        }
+        $optionItem['label'] = $optionParts[1] ?? $optionParts[0];
         return $optionItem;
     }
 

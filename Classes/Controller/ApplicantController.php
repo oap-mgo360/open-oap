@@ -267,12 +267,27 @@ class ApplicantController extends OapFrontendController
      */
     public function mailAction(\OpenOAP\OpenOap\Domain\Model\Proposal $proposal, $mailtextSetting, $mailTemplate): \Psr\Http\Message\ResponseInterface
     {
-        $getMailTextFunc = 'get'.  ucfirst($mailtextSetting);
         $mailTemplatePaths = $this->getMailTemplatePaths();
-        $mailText = $this->parseMailtext($proposal, $proposal->getCall()->getSupporter()?->$getMailTextFunc()
-            ?? $this->settings[$mailtextSetting]);
+        $proposalLangCode = $this->getProposalFrontendLanguageCode($proposal);
 
-        $this->sendEmail($proposal, $mailTemplatePaths, $mailTemplate, $mailText);
+        $unparsedMailtext = '';
+        if ($supporter = $proposal->getCall()->getSupporter()) {
+            if ($proposal->getFeLanguageUid() > 0) {
+                $translatedSupporter = $this->getTranslatedSupporter($proposal->getFeLanguageUid(), (int)$supporter->getUid());
+                $fieldName = GeneralUtility::camelCaseToLowerCaseUnderscored($mailtextSetting);
+                $unparsedMailtext = $translatedSupporter[$fieldName] ?? '';
+            }
+            if ($unparsedMailtext === '') {
+                $getMailTextFunc = 'get' . ucfirst($mailtextSetting);
+                $unparsedMailtext = $supporter->$getMailTextFunc() ?? '';
+            }
+        }
+        if ($unparsedMailtext === '') {
+            $unparsedMailtext = $this->settings[$mailtextSetting] ?? '';
+        }
+
+        $mailText = $this->parseMailtext($proposal, $unparsedMailtext, [], $proposalLangCode);
+        $this->sendEmail($proposal, $mailTemplatePaths, $mailTemplate, $mailText, $proposalLangCode);
 
         $uri = $this->uriBuilder
             ->reset()

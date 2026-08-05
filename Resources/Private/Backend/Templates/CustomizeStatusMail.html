@@ -194,10 +194,10 @@ Available variables:
                         <f:if condition="{item.mailaction.mailto}">
                             <f:then>
                                 <v:variable.set name="subject" value="{f:translate(key:'LLL:EXT:open_oap/Resources/Private/Language/locallang.xlf:tx_openoap.email.status_{state}.subject', languageKey:item.maildata.langCode, arguments:{0: siteName, 1: item.maildata.signature})}" />
-                                <v:variable.set name="mailtoBody" value="{v:format.replace(content:item.maildata.mailtext, substring:{0:'<br>', 1:'<br/>', 2:'<br />', 3:'<p>', 4:'</p>'}, replacement:'&#13;&#10;')}" />
+                                <v:variable.set name="mailtoBody" value="{v:format.replace(content:item.maildata.mailtext, substring:{0:'<br>', 1:'<br/>', 2:'<br />', 3:'<p>', 4:'</p>'}, replacement:{0:'&#13;&#10;', 1:'&#13;&#10;', 2:'&#13;&#10;', 3:'&#13;&#10;', 4:''})}" />
                                 <v:variable.set name="mailtoBody" value="{mailtoBody -> f:format.stripTags() -> f:format.htmlentitiesDecode() -> f:format.trim()}" />
 
-                                <f:link.email email="{item.mailaction.mailto.href}" subject="{subject}" body="{mailtoBody}" class="btn btn-primary mailto-action-button" target="_blank">
+                                <f:link.email email="{item.mailaction.mailto.href}" cc="{item.mailaction.mailto.cc}" subject="{subject}" body="{mailtoBody}" class="btn btn-primary mailto-action-button" target="_blank">
                                     <core:icon identifier="actions-open" />
                                     <span>{item.mailaction.text}</span>
                                 </f:link.email>

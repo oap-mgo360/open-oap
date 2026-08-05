@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="EXT:open_oap/Resources/Private/Language/femanager/fr.locallang.xlf" date="2026-05-18T10:21:00Z" product-name="open_oap">
+        <body>
+            <trans-unit id="createStatus">
+                <source>User registration</source>
+                <target>Inscription de l'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="confirmUserConfirmation">
+                <source>Please confirm the creation of your account.</source>
+                <target>Veuillez confirmer la création de votre compte.</target>
+            </trans-unit>
+            <trans-unit id="confirmUserConfirmationRefused">
+                <source>Please confirm the deletion of your account.</source>
+                <target>Veuillez confirmer la suppression de votre compte.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

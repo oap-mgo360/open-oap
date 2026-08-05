@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace OpenOAP\OpenOap\Domain\Model;
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class CallGroup extends AbstractEntity
 {
+    /**
+     * @var bool
+     */
+    protected $special = false;
+
     /**
      * @var string
      */
@@ -39,9 +45,30 @@ class CallGroup extends AbstractEntity
     protected string $defaultDeg = '';
 
     /**
+     * @var FileReference|null
+     */
+    protected $logo;
+
+    /**
      * @var string
      */
     protected $blockedLanguages;
+
+    /**
+     * @return bool
+     */
+    public function isSpecial(): bool
+    {
+        return $this->special;
+    }
+
+    /**
+     * @param bool $special
+     */
+    public function setSpcial(bool $special): void
+    {
+        $this->special = $special;
+    }
 
     /**
      * @return string
@@ -137,6 +164,22 @@ class CallGroup extends AbstractEntity
     public function setDefaultDeg(string $defaultDeg): void
     {
         $this->defaultDeg = $defaultDeg;
+    }
+
+    /**
+     * @return FileReference|null
+     */
+    public function getLogo(): ?FileReference
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param FileReference|null $logo
+     */
+    public function setLogo(?FileReference $logo): void
+    {
+        $this->logo = $logo;
     }
 
     /**

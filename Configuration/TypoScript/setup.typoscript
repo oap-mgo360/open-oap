@@ -249,6 +249,16 @@ module.tx_openoap_web_openoapbackendproposals {
     settings < plugin.tx_openoap_dashboard.settings
 }
 
+# Module configuration for deep copy
+module.tx_openoap_web_openoapbackenddeepcopy {
+    view {
+        templateRootPaths.0 = EXT:open_oap/Resources/Private/Backend/Templates/
+        partialRootPaths.0 = EXT:open_oap/Resources/Private/Backend/Partials/
+        layoutRootPaths.0 = EXT:open_oap/Resources/Private/Backend/Layouts/
+    }
+    settings < plugin.tx_openoap_dashboard.settings
+}
+
 # Module configuration
 module.tx_openoap_system_openoapbackendbackup {
     persistence {

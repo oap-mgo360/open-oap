@@ -1,0 +1,162 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <h1><f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:module.title" /></h1>
+
+    <f:flashMessages />
+
+    <f:if condition="{requestedCallUid} && !{call}">
+        <div class="alert alert-danger">
+            <f:format.printf arguments="{0: requestedCallUid}"><f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.callNotFound" /></f:format.printf>
+        </div>
+    </f:if>
+
+    <f:if condition="{call}">
+        <f:then>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.configuration" />
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-info">
+                        <strong>Call:</strong> {call.title} (UID: {call.uid})
+                    </div>
+                    <p><f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.description" /></p>
+                    <f:form action="deepCopy" method="post" class="form-horizontal" id="deepCopyForm">
+                        <f:form.hidden name="call" value="{call.uid}" />
+                        <f:form.hidden name="returnUrl" value="{returnUrl}" />
+                        <div class="form-section">
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label" for="targetPidCall">
+                                    <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidCall" />
+                                </label>
+                                <div class="col-sm-9">
+                                    <f:form.select
+                                        id="targetPidCall"
+                                        name="targetPidCall"
+                                        options="{folderOptionsCall}"
+                                        optionValueField="uid"
+                                        optionLabelField="title"
+                                        class="form-select"
+                                        required="required"
+                                    />
+                                    <small class="form-text text-muted">
+                                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidCall.help" />
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label" for="targetPidFormPages">
+                                    <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidFormPages" />
+                                </label>
+                                <div class="col-sm-9">
+                                    <f:form.select
+                                        id="targetPidFormPages"
+                                        name="targetPidFormPages"
+                                        options="{folderOptionsFormPages}"
+                                        optionValueField="uid"
+                                        optionLabelField="title"
+                                        class="form-select"
+                                        required="required"
+                                    />
+                                    <small class="form-text text-muted">
+                                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidFormPages.help" />
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label" for="targetPidFormGroups">
+                                    <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidFormGroups" />
+                                </label>
+                                <div class="col-sm-9">
+                                    <f:form.select
+                                        id="targetPidFormGroups"
+                                        name="targetPidFormGroups"
+                                        options="{folderOptionsFormGroups}"
+                                        optionValueField="uid"
+                                        optionLabelField="title"
+                                        class="form-select"
+                                        required="required"
+                                    />
+                                    <small class="form-text text-muted">
+                                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidFormGroups.help" />
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label" for="targetPidItems">
+                                    <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidItems" />
+                                </label>
+                                <div class="col-sm-9">
+                                    <f:form.select
+                                        id="targetPidItems"
+                                        name="targetPidItems"
+                                        options="{folderOptionsItems}"
+                                        optionValueField="uid"
+                                        optionLabelField="title"
+                                        class="form-select"
+                                        required="required"
+                                    />
+                                    <small class="form-text text-muted">
+                                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidItems.help" />
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label" for="targetPidItemOptions">
+                                    <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidItemOptions" />
+                                </label>
+                                <div class="col-sm-9">
+                                    <f:form.select
+                                        id="targetPidItemOptions"
+                                        name="targetPidItemOptions"
+                                        options="{folderOptionsItemOptions}"
+                                        optionValueField="uid"
+                                        optionLabelField="title"
+                                        class="form-select"
+                                        required="required"
+                                    />
+                                    <small class="form-text text-muted">
+                                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.targetPidItemOptions.help" />
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mt-4">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-primary" id="deepCopySubmitBtn">
+                                    <span id="deepCopyBtnText"><f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.submit" /></span>
+                                    <span id="deepCopyBtnSpinner" style="display:none;">
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.submitting" />
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </f:form>
+                    <f:asset.script identifier="oap_backenddeepcopy" useNonce="true">
+                        document.getElementById('deepCopyForm').addEventListener('submit', function() {
+                            var btn = document.getElementById('deepCopySubmitBtn');
+                            btn.disabled = true;
+                            document.getElementById('deepCopyBtnText').style.display = 'none';
+                            document.getElementById('deepCopyBtnSpinner').style.display = 'inline';
+                        });
+                    </f:asset.script>
+                </div>
+            </div>
+        </f:then>
+
+        <f:else>
+            <div class="alert alert-warning">
+                <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.noCallSelected" />
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+</html>

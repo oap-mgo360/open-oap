@@ -9,6 +9,10 @@ use OpenOAP\OpenOap\Domain\Model\FormPage;
 use OpenOAP\OpenOap\Utility\LocalizationUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Attribute\AsController;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***
  *
@@ -162,5 +166,25 @@ class BackendFormsController extends OapBackendController
         );
 
         $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
+
+        if ($currentAction === 'previewForm') {
+            $callUid = $this->request->getArgument('call');
+            $returnUrl = $this->uriBuilder->reset()->uriFor('previewForm', ['call' => $callUid]);
+            $deepCopyUrl = (string)$this->backendUriBuilder->buildUriFromRoute('web_OpenOapBackendDeepCopy', [
+                'call' => $callUid,
+                'returnUrl' => $returnUrl,
+            ]);
+
+            $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
+            $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+
+            $deepCopyButton = $buttonBar->makeLinkButton()
+                ->setHref($deepCopyUrl)
+                ->setTitle(LocalizationUtility::translate('LLL:EXT:open_oap/Resources/Private/Language/locallang_backend.xlf:menu.deep_copy_call'))
+                ->setShowLabelText(true)
+                ->setIcon($iconFactory->getIcon('actions-document-duplicates-select', IconSize::SMALL));
+
+            $buttonBar->addButton($deepCopyButton, ButtonBar::BUTTON_POSITION_LEFT);
+        }
     }
 }

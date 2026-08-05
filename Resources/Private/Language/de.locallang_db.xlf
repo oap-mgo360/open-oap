@@ -177,6 +177,14 @@
                 <source>Description</source>
                 <target>Beschreibung</target>
             </trans-unit>
+            <trans-unit id="tx_openoap_domain_model_callgroup.special" resname="tx_openoap_domain_model_callgroup.special">
+                <source>Special</source>
+                <target>Spezial</target>
+            </trans-unit>
+            <trans-unit id="tx_openoap_domain_model_callgroup.logo" resname="tx_openoap_domain_model_callgroup.logo">
+                <source>Logo</source>
+                <target>Logo</target>
+            </trans-unit>
             <trans-unit id="tx_openoap_domain_model_callgroup.country_giz" resname="tx_openoap_domain_model_callgroup.country_giz">
                 <source>GIZ Country Info</source>
                 <target>GIZ Länder Info</target>

@@ -23,7 +23,6 @@ use TYPO3\CMS\Beuser\Domain\Repository\BackendUserRepository;
 use TYPO3\CMS\Core\Http\UploadedFile;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
-use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
@@ -646,9 +645,9 @@ class BackendProposalsController extends OapBackendController
                     $this->proposalRepository->update($proposal);
                 }
             } elseif ($selectedMailAction == 2) {
-                $proposalList[$key]['mailaction']['mailto']['href'] = $proposal->getApplicant()?->getUsername() . '?cc=';
+                $proposalList[$key]['mailaction']['mailto']['href'] = $proposal->getApplicant()?->getUsername();
                 if ($this->request->hasArgument('cc')) {
-                    $proposalList[$key]['mailaction']['mailto']['href'].= htmlspecialchars($this->request->getArgument('cc'));
+                    $proposalList[$key]['mailaction']['mailto']['cc'] = htmlspecialchars($this->request->getArgument('cc'));
                 }
             }
         }
@@ -1471,25 +1470,6 @@ class BackendProposalsController extends OapBackendController
         return $group->getTitle() . $postfix;
     }
 
-    /**
-     * Returns the language code of the proposal feLanguageUid
-     *
-     * @param Proposal $proposal
-     * @return string The 2 letter language code
-     */
-    protected function getProposalFrontendLanguageCode(Proposal $proposal): string
-    {
-        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
-
-        try {
-            $site = $siteFinder->getSiteByPageId($proposal->getPid());
-            $siteLanguage = $site->getLanguageById($proposal->getFeLanguageUid());
-
-            return $siteLanguage->getLocale()->getLanguageCode();
-        } catch (\Throwable) {
-            return 'en';
-        }
-    }
 
     /**
      * @param array $allItems
@@ -1575,15 +1555,6 @@ class BackendProposalsController extends OapBackendController
         return $filter;
     }
 
-    /**
-     * @param int $languageUid
-     * @param int $supporter
-     * @return array
-     */
-    protected function getTranslatedSupporter(int $languageUid, int $supporter): array
-    {
-        return $this->supporterRepository->findSupporterByLanguage($languageUid, $supporter);
-    }
 
     protected function handleMenu(string $currentAction): void
     {

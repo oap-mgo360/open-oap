@@ -33,4 +33,8 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:open_oap/Resources/Public/Icons/oap_module_backup.svg',
     ],
+    'open_oap-plugin-deepcopy' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:open_oap/Resources/Public/Icons/oap_module_common.svg',
+    ],
 ];

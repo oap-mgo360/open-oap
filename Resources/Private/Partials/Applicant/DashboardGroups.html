@@ -154,22 +154,37 @@ Available variables:
                     <div class="call-group__body">
                         <f:if condition="{group.calls}">
                             <f:then>
-                                <div class="call-group__body--container">
-                                    <div class="column column--twocol">
-                                        <f:if condition="{group.country_giz}">
-                                            <p class="call-group__body--country">{group.country_giz}</p>
-                                        </f:if>
-                                        <f:render section="call"
-                                                  arguments="{calls: group.calls.1, applicant: applicant, class: 'call-list__item--giz', defaultName: group.default_giz}"/>
-                                    </div>
-                                    <div class="column column--twocol">
-                                        <f:if condition="{group.country_deg}">
-                                            <p class="call-group__body--country">{group.country_deg}</p>
-                                        </f:if>
-                                        <f:render section="call"
-                                                  arguments="{calls: group.calls.2, applicant: applicant, class: 'call-list__item--deg', defaultName: group.default_deg}"/>
-                                    </div>
+                                <div class="call-group__body--container{f:if(condition: group.special, then: ' call-group__body--special')}">
+                                    <f:if condition="!{group.special} || {group.calls.1}">
+                                        <div class="column column--twocol">
+                                            <f:if condition="{group.country_giz}">
+                                                <p class="call-group__body--country">{group.country_giz}</p>
+                                            </f:if>
+                                            <f:render section="call"
+                                                      arguments="{calls: group.calls.1, applicant: applicant, class: 'call-list__item--giz', defaultName: group.default_giz}"/>
+                                            <f:if condition="{group.special} && {group.logo}">
+                                                <f:image image="{group.logo}" class="call-group__logo call-group__logo--giz"/>
+                                            </f:if>
+                                        </div>
+                                    </f:if>
+                                    <f:if condition="!{group.special} || {group.calls.2}">
+                                        <div class="column column--twocol">
+                                            <f:if condition="{group.country_deg}">
+                                                <p class="call-group__body--country">{group.country_deg}</p>
+                                            </f:if>
+                                            <f:render section="call"
+                                                      arguments="{calls: group.calls.2, applicant: applicant, class: 'call-list__item--deg', defaultName: group.default_deg}"/>
+                                            <f:if condition="{group.special} && {group.logo}">
+                                                <f:image image="{group.logo}" class="call-group__logo call-group__logo--deg"/>
+                                            </f:if>
+                                        </div>
+                                    </f:if>
                                 </div>
+                                <f:comment>
+                                    <f:if condition="{group.special} && {group.logo}">
+                                        <f:image image="{group.logo}" class="call-group__logo"/>
+                                    </f:if>
+                                </f:comment>
                             </f:then>
                             <f:else>
                                 <p class="call-group__body--nocall">{f:translate(key:'tx_openoap_dashboard.callgroup.nocall')}</p>

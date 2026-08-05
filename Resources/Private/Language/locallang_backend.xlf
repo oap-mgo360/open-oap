@@ -473,7 +473,12 @@
     <trans-unit id="constants.zip_structure.proposal.titlelength">
         <source>Length of the title in the file name</source>
     </trans-unit>
-
+    <trans-unit id="contextMenu.deepCopyCall" resname="contextMenu.deepCopyCall">
+        <source>Deep Copy Call</source>
+    </trans-unit>
+    <trans-unit id="menu.deep_copy_call" resname="menu.deep_copy_call">
+        <source>Deep Copy Call</source>
+    </trans-unit>
         </body>
     </file>
 </xliff>

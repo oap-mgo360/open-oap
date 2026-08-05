@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-02-26T16:28:00Z" product-name="open_oap">
+        <header/>
+        <body>
+            <trans-unit id="mlang_tabs_tab" resname="mlang_tabs_tab">
+                <source>Deep Copy Call</source>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tabdescr" resname="mlang_labels_tabdescr">
+                <source>Deep copy a call with all form pages, groups and items</source>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tablabel" resname="mlang_labels_tablabel">
+                <source>Deep Copy Call</source>
+            </trans-unit>
+            <trans-unit id="module.title" resname="module.title">
+                <source>Deep Copy Call</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.configuration" resname="deepCopy.configuration">
+                <source>Configuration</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.description" resname="deepCopy.description">
+                <source>Configure the target folders (PIDs) for the deep copy. All form pages, form groups and form items will be copied to the specified folders.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidCall" resname="deepCopy.targetPidCall">
+                <source>Target PID for Call</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidCall.help" resname="deepCopy.targetPidCall.help">
+                <source>Page ID where the copied call record will be stored.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidFormPages" resname="deepCopy.targetPidFormPages">
+                <source>Target PID for Form Pages</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidFormPages.help" resname="deepCopy.targetPidFormPages.help">
+                <source>Page ID where the copied form pages will be stored.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidFormGroups" resname="deepCopy.targetPidFormGroups">
+                <source>Target PID for Form Groups</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidFormGroups.help" resname="deepCopy.targetPidFormGroups.help">
+                <source>Page ID where the copied form groups will be stored.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidItems" resname="deepCopy.targetPidItems">
+                <source>Target PID for Items</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidItems.help" resname="deepCopy.targetPidItems.help">
+                <source>Page ID where the copied form items will be stored.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidItemOptions" resname="deepCopy.targetPidItemOptions">
+                <source>Target PID for Item Options</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.targetPidItemOptions.help" resname="deepCopy.targetPidItemOptions.help">
+                <source>Page ID where the copied item options will be stored.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.submit" resname="deepCopy.submit">
+                <source>Start Deep Copy</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.submitting" resname="deepCopy.submitting">
+                <source>Deep copy in progress...</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.noCallSelected" resname="deepCopy.noCallSelected">
+                <source>No call selected. Please use the context menu on a call record to start a deep copy.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.callNotFound" resname="deepCopy.callNotFound">
+                <source>The call with UID %1$s was not found. Please check the UID and try again.</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.noCopy" resname="deepCopy.noCopy">
+                <source>--- Do not copy (keep originals) ---</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.success.title" resname="deepCopy.success.title">
+                <source>Success</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.success.message" resname="deepCopy.success.message">
+                <source>Deep copy completed successfully. New Call UID: %d</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.error.title" resname="deepCopy.error.title">
+                <source>Error</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.error.message" resname="deepCopy.error.message">
+                <source>Error during deep copy: %s</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.redirecting" resname="deepCopy.redirecting">
+                <source>Deep copy completed. Redirecting...</source>
+            </trans-unit>
+            <trans-unit id="deepCopy.cancel" resname="deepCopy.cancel">
+                <source>Cancel</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

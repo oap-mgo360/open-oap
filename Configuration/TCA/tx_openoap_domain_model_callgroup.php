@@ -4,6 +4,8 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:open_oap/Resources/Private/Language/locallang_db.xlf:tx_openoap_domain_model_callgroup',
         'label' => 'title',
+        'label_alt' => 'description',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'versioningWS' => false,
@@ -18,7 +20,7 @@ return [
         'iconfile' => 'EXT:open_oap/Resources/Public/Icons/oap_model.svg',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, country_giz, country_deg, default_giz, default_deg, blocked_languages, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource'],
+        '1' => ['showitem' => 'special, title, description, country_giz, country_deg, default_giz, default_deg, logo, blocked_languages, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -61,6 +63,21 @@ return [
                     [
                         'label' => '',
                         'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'special' => [
+            'exclude' => false,
+            'l10n_display' => 'defaultAsReadonly',
+            'label' => 'LLL:EXT:open_oap/Resources/Private/Language/locallang_db.xlf:tx_openoap_domain_model_callgroup.special',
+            'onChange' => 'reload',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => 'active',
                     ],
                 ],
             ],
@@ -124,6 +141,18 @@ return [
                 'default' => '',
             ],
         ],
+        'logo' => [
+            'exclude' => false,
+            'l10n_display' => 'defaultAsReadonly',
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:open_oap/Resources/Private/Language/locallang_db.xlf:tx_openoap_domain_model_callgroup.logo',
+            'displayCond' => 'FIELD:special:=:1',
+            'config' => [
+                'type' => 'file',
+                'maxitems' => 1,
+                'allowed' => ['common-image-types'],
+            ],
+        ],
         'blocked_languages' =>[
             'l10n_display' => 'defaultAsReadonly',
             'l10n_mode' => 'exclude',
@@ -131,16 +160,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'items' => [
-                    [
-                        'label' => 'English',
-                        'value' => 0,
-                    ],
-                    [
-                        'label' => 'Deutsch',
-                        'value' => 1,
-                    ],
-                ],
+                'itemsProcFunc' => \OpenOAP\OpenOap\UserFunctions\FormEngine\LanguageItemsProcFunc::class . '->getLanguageItems',
                 'size' => 3,
                 'autoSizeMax' => 10,
                 'multiple' => true,

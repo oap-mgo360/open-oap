@@ -25,7 +25,7 @@ class SupporterRepository
     {
         $queryBuilder = $this->getQueryBuilder();
 
-        return $queryBuilder
+        $result = $queryBuilder
             ->select('*')
             ->from(self::TABLE)
             ->where(
@@ -34,6 +34,8 @@ class SupporterRepository
             )
             ->executeQuery()
             ->fetchAssociative();
+
+        return is_array($result) ? $result : [];
     }
 
     /**

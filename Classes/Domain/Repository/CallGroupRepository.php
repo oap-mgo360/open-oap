@@ -21,12 +21,14 @@ class CallGroupRepository extends OapAbstractRepository
             $uid = $row->getUid();
 
             $callGroups[$uid] = [
+                'special' => $row->isSpecial(),
                 'title' => $row->getTitle(),
                 'description' => $row->getDescription(),
                 'country_giz' => $row->getCountryGiz(),
                 'country_deg' => $row->getCountryDeg(),
                 'default_giz' => $row->getDefaultGiz(),
                 'default_deg' => $row->getDefaultDeg(),
+                'logo' => $row->getLogo(),
                 'blocked_languages' => $row->getBlockedLanguages(),
             ];
         }

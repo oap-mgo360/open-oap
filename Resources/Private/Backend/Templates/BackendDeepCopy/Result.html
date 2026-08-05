@@ -1,0 +1,56 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <h1><f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:module.title" /></h1>
+
+    <div id="deepCopyResult"
+         data-notification-type="{notificationType}"
+         data-notification-title="{notificationTitle}"
+         data-notification-message="{notificationMessage}"
+         data-return-url="{returnUrl}"
+         style="display:none;"></div>
+
+    <f:asset.script identifier="oap_backenddeepcopyresult" useNonce="true">
+        const el = document.getElementById('deepCopyResult');
+
+        if (el) {
+            const type = el.dataset.notificationType || 'error';
+            const title = el.dataset.notificationTitle || '';
+            const message = el.dataset.notificationMessage || '';
+            const returnUrl = el.dataset.returnUrl || '';
+
+            if (type === 'success') {
+                top.TYPO3.Notification.success(title, message, 0);
+            } else {
+                top.TYPO3.Notification.error(title, message, 0);
+            }
+
+            if (returnUrl) {
+                top.TYPO3.Backend.ContentContainer.setUrl(returnUrl);
+            }
+        }
+    </f:asset.script>
+
+    <f:if condition="{returnUrl}">
+        <f:then>
+            <div class="alert alert-info">
+                <f:translate key="LLL:EXT:open_oap/Resources/Private/Language/locallang_BackendDeepCopy.xlf:deepCopy.redirecting" />
+            </div>
+        </f:then>
+        <f:else>
+            <f:if condition="{notificationType} == 'success'">
+                <f:then>
+                    <div class="alert alert-success">{notificationMessage}</div>
+                </f:then>
+                <f:else>
+                    <div class="alert alert-danger">{notificationMessage}</div>
+                </f:else>
+            </f:if>
+        </f:else>
+    </f:if>
+</f:section>
+</html>
